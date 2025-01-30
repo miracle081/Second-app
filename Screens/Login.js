@@ -1,9 +1,13 @@
 import { Text, View, StyleSheet, ImageBackground, TextInput, Image, Button, TouchableOpacity, Alert, ScrollView, FlatList } from 'react-native';
 import { useState } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+import { faHandSparkles, faSignIn } from '@fortawesome/free-solid-svg-icons';
+import { Button as Action } from "react-native-paper"
 
 export function Login() {
     const [email, setEmail] = useState("john@io.ai");
     const [password, setPassword] = useState("1234");
+    const [isLoading, setIsLoading] = useState(false);
     let user = "Adam";
     user = "Mark";
 
@@ -38,8 +42,18 @@ export function Login() {
                     />
                     {/* <Button title="Submit" onPress={()=>{}} /> */}
                     <TouchableOpacity onPress={() => { displayMSG() }} style={styles.btn}>
+                        <FontAwesomeIcon icon={faSignIn} size={20} color='white' />
                         <Text style={{ color: "white", fontWeight: "bold", fontSize: 18 }}>Sign In</Text>
                     </TouchableOpacity>
+                    <Action
+                        mode="contained"
+                        buttonColor="#0078e9"
+                        style={{ marginTop: 10 }}
+                        icon="account"
+                        loading={isLoading}
+                        onPress={() => setIsLoading(isLoading ? false : true)}
+                    >Activate Account</Action>
+
                     {/* <FlatList
                         data={users}
                         renderItem={({ item }) => {
@@ -79,7 +93,9 @@ const styles = StyleSheet.create({
         backgroundColor: "#0078e9",
         padding: 10,
         borderRadius: 50,
-        alignItems: "center",
-        marginTop: 10
+        marginTop: 10,
+        flexDirection: "row",
+        justifyContent: "center",
+        gap: 10
     }
 })
